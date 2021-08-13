@@ -1,0 +1,72 @@
+// Clippy lints
+#![cfg_attr(feature = "clippy", feature(plugin))]
+#![cfg_attr(feature = "clippy", plugin(clippy))]
+#![cfg_attr(feature = "clippy", allow(
+    doc_markdown,
+// allow double_parens for bson/doc macro.
+    double_parens,
+// more explicit than catch-alls.
+    match_wild_err_arm,
+    too_many_arguments,
+))]
+#![cfg_attr(all(test, feature = "clippy"), allow(
+    large_enum_variant,
+    print_stdout,
+    result_unwrap_used
+))]
+#![cfg_attr(feature = "clippy", warn(
+    cast_precision_loss,
+    enum_glob_use,
+    filter_map,
+    if_not_else,
+    invalid_upcast_comparisons,
+    items_after_statements,
+    mem_forget,
+    mut_mut,
+    mutex_integer,
+    non_ascii_literal,
+    nonminimal_bool,
+    option_map_unwrap_or,
+    option_map_unwrap_or_else,
+    shadow_reuse,
+    shadow_same,
+    shadow_unrelated,
+    similar_names,
+    unicode_not_nfc,
+    unseparated_literal_suffix,
+    used_underscore_binding,
+    wrong_pub_self_convention,
+))]
+
+#[macro_use(ulps_eq)]
+extern crate approx;
+#[macro_use(doc)]
+extern crate bson;
+extern crate mongodb_cwal as mongodb;
+extern crate rand;
+extern crate semver;
+#[macro_use]
+extern crate serde_derive;
+extern crate serde;
+extern crate serde_json;
+
+#[macro_export]
+macro_rules! skip_if_db_version_below {
+    ($db:expr, $major:expr, $minor:expr) => {{
+        use mongodb::db::ThreadedDatabase;
+        use semver::Version;
+
+        if $db.version().unwrap() < Version::from(($major, $minor, 0)) {
+            return;
+        }
+    }};
+}
+
+mod apm;
+mod auth;
+mod client;
+mod json;
+mod sdam;
+mod server_selection;
+#[cfg(feature = "ssl")]
+mod ssl;

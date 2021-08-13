@@ -1,0 +1,14 @@
+*.img
+*.swp
+*.bin
+*.tmp
+*.o
+*~
+test_log.txt
+bin/
+target/
+test/
+travis/
+Cargo.lock
+.idea
+*.iml

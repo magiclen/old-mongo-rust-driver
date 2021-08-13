@@ -1,0 +1,7 @@
+[workspace]
+members = [
+    "mongodb-cwal-rs-master",
+    "MACs-hmac-v0.6.3",
+    "traits-crypto-mac-v0.6.2",
+    "password-hashes-pbkdf2-v0.2.3"
+]

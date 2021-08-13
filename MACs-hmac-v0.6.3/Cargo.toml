@@ -1,0 +1,22 @@
+[package]
+name = "hmac"
+version = "0.6.3"
+authors = ["RustCrypto Developers"]
+license = "MIT OR Apache-2.0"
+description = "Generic implementation of Hash-based Message Authentication Code (HMAC)"
+documentation = "https://docs.rs/hmac"
+repository = "https://github.com/RustCrypto/MACs"
+keywords = ["crypto", "mac", "hmac", "digest"]
+categories = ["cryptography", "no-std"]
+
+[dependencies]
+crypto-mac = { path = "../traits-crypto-mac-v0.6.2" }
+digest = "0.7"
+
+[dev-dependencies]
+crypto-mac = { path = "../traits-crypto-mac-v0.6.2", features = ["dev"] }
+md-5 = "0.7"
+sha2 = "0.7"
+
+[badges]
+travis-ci = { repository = "RustCrypto/hashes" }

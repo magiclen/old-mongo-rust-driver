@@ -1,0 +1,9 @@
+language: rust
+rust:
+  - stable
+  - nightly
+  - 1.21.0
+matrix:
+  allow_failures:
+    - rust: nightly
+script: cargo test --verbose --all
